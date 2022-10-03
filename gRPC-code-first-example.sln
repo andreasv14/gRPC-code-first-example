@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "src\Contracts\Contracts.csproj", "{82C9E05A-D410-44C8-9176-09104C99DA71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "src\Contracts\Contracts.csproj", "{82C9E05A-D410-44C8-9176-09104C99DA71}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{115CBE4A-F259-41FC-9340-3D84501C3929}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "src\Server\Server.csproj", "{6C87DC96-C660-42EE-AE95-A2992803A0B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "src\Server\Server.csproj", "{6C87DC96-C660-42EE-AE95-A2992803A0B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "src\Client\Client.csproj", "{F5491782-19BB-4FEB-AD3B-A83DB0E69CE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "src\Client\Client.csproj", "{F5491782-19BB-4FEB-AD3B-A83DB0E69CE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{90A6E4FA-EFA4-4923-B7C4-AAA8FEAB0C70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,9 +36,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{82C9E05A-D410-44C8-9176-09104C99DA71} = {115CBE4A-F259-41FC-9340-3D84501C3929}
+		{82C9E05A-D410-44C8-9176-09104C99DA71} = {90A6E4FA-EFA4-4923-B7C4-AAA8FEAB0C70}
 		{6C87DC96-C660-42EE-AE95-A2992803A0B4} = {115CBE4A-F259-41FC-9340-3D84501C3929}
 		{F5491782-19BB-4FEB-AD3B-A83DB0E69CE0} = {115CBE4A-F259-41FC-9340-3D84501C3929}
+		{90A6E4FA-EFA4-4923-B7C4-AAA8FEAB0C70} = {115CBE4A-F259-41FC-9340-3D84501C3929}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1BD4B591-5AAC-4051-B5A5-79D131762A75}

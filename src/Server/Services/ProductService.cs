@@ -8,13 +8,15 @@ namespace Server.Services;
 
 public class ProductService : IProductService
 {
-    public async Task<AddProductReply> AddProductAsync(AddProductRequest request, CallContext context = default)
+    public async Task<BaseResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default)
     {
-        throw new Exception("Domain exception");
-
-        return new AddProductReply
+        return new BaseResponse<AddProductReply>
         {
-            Message = "From server"
+            IsSuccess = true,
+            Data = new AddProductReply
+            {
+                Message = "From server are you sure"
+            }
         };
     }
 }

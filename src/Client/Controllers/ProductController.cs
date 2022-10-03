@@ -18,7 +18,7 @@ namespace Client.Controllers
 
             var reply = await client.AddProductAsync(
                 new AddProductRequest { Name = "From client" });
-
+            
             return Ok(reply);
         }
     }

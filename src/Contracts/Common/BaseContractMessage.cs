@@ -1,11 +1,9 @@
 ﻿using System.Runtime.Serialization;
-using Contracts.Base;
-using Contracts.Common;
 
-namespace Contracts.Responses;
+namespace Contracts.Common;
 
 [DataContract]
-public class AddProductReply
+public class BaseContractMessage
 {
     [DataMember(Order = 1)]
     public string Message { get; set; }
