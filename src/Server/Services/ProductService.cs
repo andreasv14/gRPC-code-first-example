@@ -2,21 +2,38 @@
 using Contracts.Requests;
 using Contracts.Responses;
 using Contracts.Services;
+using Microsoft.AspNetCore.Mvc;
 using ProtoBuf.Grpc;
+using System.ServiceModel;
 
 namespace Server.Services;
 
+[ServiceContract]
 public class ProductService : IProductService
 {
-    public async Task<BaseResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default)
+    [CustomAttribute(typeof(BaseResponse<AddProductRequest>))]  
+    public async Task<AddProductReply> AddProductAsync(AddProductRequest request, CallContext context = default)
     {
-        return new BaseResponse<AddProductReply>
+        throw new Exception("dfdfgfdg");
+
+        return new AddProductReply
         {
-            IsSuccess = true,
-            Data = new AddProductReply
-            {
-                Message = "From server are you sure"
-            }
+            Message = "From server are you sure"
         };
     }
+
+    //public async Task<BaseResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default)
+    //{
+    //    throw new Exception("dfdfgfdg");
+
+    //    var d = new AddProductReply
+    //    {
+    //        Message = "From server are you sure"
+    //    };
+
+    //    return new BaseResponse<AddProductReply>
+    //    {
+    //        Data = d
+    //    };
+    //}
 }

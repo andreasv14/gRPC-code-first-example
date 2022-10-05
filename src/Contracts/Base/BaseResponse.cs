@@ -3,7 +3,7 @@
 namespace Contracts.Base;
 
 [DataContract]
-public class BaseResponse<T> where T : class
+public class BaseResponse<TContractMessage> where TContractMessage : class
 {
     [DataMember(Order = 1)]
     public bool IsSuccess { get; set; }
@@ -12,5 +12,5 @@ public class BaseResponse<T> where T : class
     public string? ErrorMessage { get; set; }
 
     [DataMember(Order = 3)]
-    public T? Data { get; set; }
+    public TContractMessage? Data { get; set; }
 }

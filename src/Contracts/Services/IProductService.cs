@@ -10,8 +10,8 @@ namespace Contracts.Services;
 public interface IProductService
 {
     [OperationContract]
-    Task<BaseResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default);
-    
-//    [OperationContract]
-//    Task<BaseResponse> AddProductAsync(AddProductRequest request, CallContext context = default);
+    Task<AddProductReply> AddProductAsync(AddProductRequest request, CallContext context = default);
+
+    //[OperationContract]
+    //Task<BaseResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default);
 }

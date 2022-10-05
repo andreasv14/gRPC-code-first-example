@@ -1,4 +1,5 @@
 using ProtoBuf.Grpc.Server;
+using Server.Interceptors;
 //using Server.Interceptors;
 using Server.Services;
 
@@ -6,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 {
     builder.Services.AddCodeFirstGrpc();
     builder.Services.AddGrpc();
-    //builder.Services.AddGrpc(c => c.Interceptors.Add<GrpcGlobalExceptionHandlerInterceptor>());
+    builder.Services.AddGrpc(c => c.Interceptors.Add<GrpcMessageWrapperInterceptor>());
 }
 
 

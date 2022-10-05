@@ -1,6 +1,4 @@
 ﻿using System.Runtime.Serialization;
-using Contracts.Base;
-using Contracts.Common;
 
 namespace Contracts.Responses;
 
