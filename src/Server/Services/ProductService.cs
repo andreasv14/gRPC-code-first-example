@@ -11,10 +11,10 @@ namespace Server.Services;
 [ServiceContract]
 public class ProductService : IProductService
 {
-    [CustomAttribute(typeof(BaseResponse<AddProductRequest>))]  
+    [CustomAttribute(typeof(BaseResponse<AddProductRequest>))]
     public async Task<AddProductReply> AddProductAsync(AddProductRequest request, CallContext context = default)
     {
-        throw new Exception("dfdfgfdg");
+        //throw new Exception("dfdfgfdg");
 
         return new AddProductReply
         {
@@ -24,7 +24,7 @@ public class ProductService : IProductService
 
     //public async Task<BaseResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default)
     //{
-    //    throw new Exception("dfdfgfdg");
+    //    //throw new Exception("dfdfgfdg");
 
     //    var d = new AddProductReply
     //    {
