@@ -1,6 +1,11 @@
 ﻿using Contracts.Base;
 using Grpc.Core;
 using Grpc.Core.Interceptors;
+using Newtonsoft.Json;
+using System.Net;
+using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Server.Interceptors;
 
@@ -20,37 +25,32 @@ public class GrpcMessageWrapperInterceptor : Interceptor
     {
         try
         {
-            var call = continuation(request, context);
 
-            var response = new BaseResponse<TResponse>()
-            {
-                IsSuccess = true,
-                Data = call.Result
-            };
+            return await continuation(request, context);
 
-            return MapResponse(response);
         }
         catch (Exception e)
         {
             _logger.LogError(e, e.Message);
 
-            var response = new BaseResponse<TResponse>()
-            {
-                IsSuccess = false,
-                ErrorMessage = e.Message
-            };
 
-            return MapResponse(response);
+
+
+            return FailedResponse<TResponse>(e.Message);
         }
     }
 
-    private TResponse MapResponse<TResponse>(BaseResponse<TResponse> response) where TResponse : class
+    private TResponse FailedResponse<TResponse>(string errorMessage) where TResponse : class
     {
         var concreteResponse = Activator.CreateInstance<TResponse>();
-        concreteResponse?.GetType().GetProperty(nameof(response.IsSuccess))?.SetValue(concreteResponse, response.IsSuccess);
-        concreteResponse?.GetType().GetProperty(nameof(response.ErrorMessage))?.SetValue(concreteResponse, response.ErrorMessage);
-        concreteResponse?.GetType().GetProperty(nameof(response.Data))?.SetValue(concreteResponse, response.Data);
+        if (concreteResponse is IGrpcResponseBase)
+        {
+            concreteResponse?.GetType().GetProperty("IsSuccess")?.SetValue(concreteResponse, false);
+            concreteResponse?.GetType().GetProperty("ErrorMessage")?.SetValue(concreteResponse, errorMessage);
+            concreteResponse?.GetType().GetProperty("StatusCode")?.SetValue(concreteResponse, (int)HttpStatusCode.InternalServerError);
+            concreteResponse?.GetType().GetProperty("Data")?.SetValue(concreteResponse, null);
 
+        }
         return concreteResponse;
     }
 }
