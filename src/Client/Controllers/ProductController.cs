@@ -21,5 +21,17 @@ namespace Client.Controllers
             
             return Ok(reply);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProduct()
+        {
+            using var channel = GrpcChannel.ForAddress("https://localhost:7237");
+            var client = channel.CreateGrpcService<IProductService>();
+
+            var reply = await client.GetProduct(
+                new AddProductRequest { Name = "From client" });
+
+            return Ok(reply);
+        }
     }
 }

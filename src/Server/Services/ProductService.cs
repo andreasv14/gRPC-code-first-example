@@ -11,15 +11,18 @@ namespace Server.Services;
 [ServiceContract]
 public class ProductService : IProductService
 {
-    [CustomAttribute(typeof(BaseResponse<AddProductRequest>))]
-    public async Task<AddProductReply> AddProductAsync(AddProductRequest request, CallContext context = default)
+    [CustomAttribute(typeof(GrpcResponse<AddProductRequest>))]
+    public async Task<GrpcResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default)
     {
-        //throw new Exception("dfdfgfdg");
+        throw new Exception("dfdfgfdg");
 
-        return new AddProductReply
-        {
-            Message = "From server are you sure"
-        };
+        return GrpcResponse<AddProductReply>.Ok(new AddProductReply() { Message = "test response"});
+    }
+
+    public async Task<GrpcResponseBase> GetProduct(AddProductRequest request, CallContext context)
+    {
+        throw new Exception("dfdfgfdg");
+        return GrpcResponseBase.Ok();
     }
 
     //public async Task<BaseResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default)
