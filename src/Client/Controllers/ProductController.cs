@@ -1,5 +1,6 @@
 ﻿using Contracts.Requests;
 using Contracts.Services;
+using Contracts.Services.Client;
 using Grpc.Net.Client;
 using Microsoft.AspNetCore.Mvc;
 using ProtoBuf.Grpc.Client;
@@ -10,25 +11,28 @@ namespace Client.Controllers
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
+        private readonly IProductClientService _client;
+
+        public ProductController()
+        {
+            var channel = GrpcChannel.ForAddress("https://localhost:7237");
+            _client = channel.CreateGrpcService<IProductClientService>();
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddProduct()
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:7237");
-            var client = channel.CreateGrpcService<IProductService>();
+            //var reply = await _client.AddProductAsync(
+            //    new AddProductRequest { Name = "From client" });
 
-            var reply = await client.AddProductAsync(
-                new AddProductRequest { Name = "From client" });
-            
-            return Ok(reply);
+            //return Ok(reply);
+            return Ok();
         }
 
         [HttpGet]
         public async Task<IActionResult> GetProduct()
         {
-            using var channel = GrpcChannel.ForAddress("https://localhost:7237");
-            var client = channel.CreateGrpcService<IProductService>();
-
-            var reply = await client.GetProduct(
+            var reply = await _client.GetProduct(
                 new AddProductRequest { Name = "From client" });
 
             return Ok(reply);

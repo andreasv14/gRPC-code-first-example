@@ -1,17 +1,13 @@
 ﻿using System.ServiceModel;
 using Contracts.Base;
 using Contracts.Requests;
-using Contracts.Responses;
 using ProtoBuf.Grpc;
 
-namespace Contracts.Services;
+namespace Contracts.Services.Client;
 
 [ServiceContract(Name = "UserService")]
-public interface IProductService
+public interface IProductClientService
 {
-    [OperationContract]
-    Task<GrpcResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default);
-
     [OperationContract]
     Task<GrpcResponseBase> GetProduct(AddProductRequest request, CallContext context = default);
 }
