@@ -3,7 +3,7 @@
 namespace Contracts.Base;
 
 [DataContract]
-public class GrpcResponse<T> : IGrpcResponseBase where T : class
+public class GrpcResponse<T> : IGrpcResponse where T : class
 {
     [DataMember(Order = 1)]
     public bool IsSuccess { get; set; }
@@ -42,7 +42,7 @@ public class GrpcResponse<T> : IGrpcResponseBase where T : class
 }
 
 [DataContract]
-public class GrpcResponseBase : IGrpcResponseBase
+public class GrpcResponse : IGrpcResponse
 {
     [DataMember(Order = 1)]
     public bool IsSuccess { get; set; }
@@ -53,9 +53,9 @@ public class GrpcResponseBase : IGrpcResponseBase
     [DataMember(Order = 3)]
     public int StatusCode { get; set; }
 
-    public static GrpcResponseBase Ok()
+    public static GrpcResponse Ok()
     {
-        return new GrpcResponseBase
+        return new GrpcResponse
         {
             IsSuccess = true,
             StatusCode = 200,
@@ -63,9 +63,9 @@ public class GrpcResponseBase : IGrpcResponseBase
         };
     }
 
-    public static GrpcResponseBase Failed(string errorMessage, int statusCode)
+    public static GrpcResponse Failed(string errorMessage, int statusCode)
     {
-        return new GrpcResponseBase
+        return new GrpcResponse
         {
             StatusCode = statusCode,
             IsSuccess = false,
@@ -75,7 +75,7 @@ public class GrpcResponseBase : IGrpcResponseBase
     }
 }
 
-public interface IGrpcResponseBase
+public interface IGrpcResponse
 {
     [DataMember(Order = 1)]
     public bool IsSuccess { get; set; }
@@ -85,6 +85,4 @@ public interface IGrpcResponseBase
 
     [DataMember(Order = 3)]
     public int StatusCode { get; set; }
-
-    
 }

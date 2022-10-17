@@ -4,7 +4,7 @@ using Contracts.Requests;
 using Contracts.Responses;
 using ProtoBuf.Grpc;
 
-namespace Contracts.Services;
+namespace Contracts.Services.Server;
 
 [ServiceContract(Name = "UserService")]
 public interface IProductService

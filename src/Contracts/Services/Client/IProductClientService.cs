@@ -1,6 +1,7 @@
 ﻿using System.ServiceModel;
 using Contracts.Base;
 using Contracts.Requests;
+using Contracts.Responses;
 using ProtoBuf.Grpc;
 
 namespace Contracts.Services.Client;
@@ -9,5 +10,8 @@ namespace Contracts.Services.Client;
 public interface IProductClientService
 {
     [OperationContract]
-    Task<GrpcResponseBase> GetProduct(AddProductRequest request, CallContext context = default);
+    Task<GrpcResponse> GetProduct(AddProductRequest request, CallContext context = default);
+
+    [OperationContract]
+    Task<GrpcResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default);
 }

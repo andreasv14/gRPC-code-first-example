@@ -22,11 +22,10 @@ namespace Client.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct()
         {
-            //var reply = await _client.AddProductAsync(
-            //    new AddProductRequest { Name = "From client" });
+            var reply = await _client.AddProductAsync(
+                new AddProductRequest { Name = "From client" });
 
-            //return Ok(reply);
-            return Ok();
+            return Ok(reply);
         }
 
         [HttpGet]

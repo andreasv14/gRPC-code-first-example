@@ -33,24 +33,26 @@ public class GrpcMessageWrapperInterceptor : Interceptor
         {
             _logger.LogError(e, e.Message);
 
-
-
-
             return FailedResponse<TResponse>(e.Message);
         }
     }
 
     private TResponse FailedResponse<TResponse>(string errorMessage) where TResponse : class
     {
-        var concreteResponse = Activator.CreateInstance<TResponse>();
-        if (concreteResponse is IGrpcResponseBase)
-        {
-            concreteResponse?.GetType().GetProperty("IsSuccess")?.SetValue(concreteResponse, false);
-            concreteResponse?.GetType().GetProperty("ErrorMessage")?.SetValue(concreteResponse, errorMessage);
-            concreteResponse?.GetType().GetProperty("StatusCode")?.SetValue(concreteResponse, (int)HttpStatusCode.InternalServerError);
-            concreteResponse?.GetType().GetProperty("Data")?.SetValue(concreteResponse, null);
 
+        // var response = concreteResponse is IGrpcResponse;
+
+        // var concreteResponse = response;
+
+
+        var concreteResponse = Activator.CreateInstance<TResponse>();
+        if (concreteResponse is IGrpcResponse response)
+        {
+            response.IsSuccess = false;
+            response.ErrorMessage = errorMessage;
+            response.StatusCode = (int)HttpStatusCode.InternalServerError;
         }
+
         return concreteResponse;
     }
 }

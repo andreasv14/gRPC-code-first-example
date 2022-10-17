@@ -3,19 +3,41 @@ using Contracts.Requests;
 using Contracts.Responses;
 using ProtoBuf.Grpc;
 using System.ServiceModel;
+using Contracts.Models;
 
 namespace Server.Services;
 
 [ServiceContract(Name = "ProductService")]
 public class ProductService : Contracts.Services.IProductService
 {
-    public async Task<GrpcResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default)
+    private readonly List<Category> _categories;
+    private readonly AddProductReply _response;
+    public ProductService()
     {
-        return GrpcResponse<AddProductReply>.Ok(new AddProductReply() { Message = "test response"});
+        _categories = new List<Category>
+        {
+            new() { Description = "Foods" },
+            new() { Description = "Beverages" }
+        };
+
+        _response = new AddProductReply
+        {
+            Message = "Response from server",
+            Categories = _categories
+        };
     }
 
-    public async Task<GrpcResponseBase> GetProduct(AddProductRequest request, CallContext context)
+    public async Task<GrpcResponse<AddProductReply>> AddProductAsync(AddProductRequest request, CallContext context = default)
     {
-        return GrpcResponseBase.Ok();
+        throw new Exception("Exception with type");
+
+        return GrpcResponse<AddProductReply>.Ok(_response);
+    }
+
+    public async Task<GrpcResponse> GetProduct(AddProductRequest request, CallContext context)
+    {
+        throw new Exception("Exception with no type");
+
+        return GrpcResponse.Ok();
     }
 }
